@@ -4,7 +4,6 @@ const express = require('express')
 const Sequelize = require('sequelize')
 const app = express()
 const morgan = require('morgan')
-const mysql = require('mysql')
 app.use(morgan('short'))
 
 const sequelize  = new Sequelize('boxing247_mysql', 'root', 'boxing', {
@@ -45,30 +44,8 @@ app.get('/user/:id', (req, res) => {
 		res.json(results)
 	})
 	)
-
 	//console.log(results)
 })
-
-// 	const connection = mysql.createConnection({
-// 		host: 'localhost',
-// 		user: 'root',
-// 		password: 'boxing',
-// 		database: 'boxing247_mysql'
-// 	})
-
-// 	connection.query("SELECT Boxers.id, Boxers.firstName,(select GROUP_CONCAT( JSON_OBJECT('belts_id',belts_id)) from Boxer_Has_Belts where boxer_id = Boxers.id) AS belts FROM Boxers LEFT JOIN Boxer_has_Belts ON Boxers.id = Boxer_has_Belts.boxer_id LEFT JOIN Belts ON Belts.id = Boxer_has_Belts.belts_id GROUP BY Boxers.id;", (err, rows, fields) => {
-// 		console.log("fetched users successfully")
-
-// 		if (err) {
-// 			return res.status(err.statusCode || 500).send(err.message)
-// 		}
-
-// 		res.json(rows)
-// 	})
-
-// 	//console.log("Fetching user with id: " + req.params.id)
-// // 	//res.end
-// })
 
 app.get("/", (req, res) => {
 	console.log("Respoding to route")
